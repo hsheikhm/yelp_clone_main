@@ -13,4 +13,14 @@ feature 'reviewing' do
     review
     expect(page).not_to have_link 'Review KFC'
   end
+
+  scenario 'displays an average rating for all reviews' do
+    signup
+    add_restaurant
+    review
+    click_link 'Sign out'
+    signup("test7@testing.com")
+    review("Great", 5)
+    expect(page).to have_content 'Average rating: 4'
+  end
 end
